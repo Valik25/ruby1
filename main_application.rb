@@ -1,9 +1,13 @@
-# клас з налаштуваннями додатку, поля = операційна система, шлях до файлів json та csv
 class MainApplication
-    attr_accessor :path_csv, :path_json, :os
-    def initialize(path_csv=nil, path_json=nil, os=nil)
-        @path_csv = path_csv
-        @path_json = path_json
-        @os = os
-    end
+  attr_accessor :path_to_csv, :path_to_json, :path_to_txt
+
+  def initialize(
+    path_to_csv = nil,
+    path_to_json = nil,
+    path_to_txt = nil
+  )
+    @path_to_csv = path_to_csv
+    @path_to_json = path_to_json
+    @path_to_txt = path_to_txt
+  end
 end

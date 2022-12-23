@@ -1,35 +1,70 @@
-# клас для елементів парсингу
 class Item
-    
-    # поля: ціна, заголовок, наявність, код продукту, картинки, посилання
-    attr_accessor :price, :title, :availability, :product_code, :images, :link
-    
-    # конструктор
-    def initialize(price=nil, title=nil, availability=nil, product_code=nil,
-        images = nil, link=nil)
-        @price = price
-        @title = title
-        @availability = availability
-        @product_code = product_code
-        @images = images
-        @link = link
-    end
+  attr_accessor :link, :title, :price, :availability, :product_code, :images
 
-    # для методу puts
-    def to_s()
-        "price=#@price, title=#@title, availibility=#@availability, product=#@product_code,
-         link=#@link, images=#@images"
-    end
+  def initialize(
+    link = nil,
+    title = nil,
+    price = nil,
+    availability = nil,
+    product_code = nil,
+    images = nil
+  )
+    @link = link
+    @title = title
+    @price = price
+    @availability = availability
+    @product_code = product_code
+    @images = images
+  end
 
-    # хеш
-    def to_h()
-        {'price' => @price, 'title'=> @title, 'availibility' => @availability, 
-            'product_code' => @product_code, 'link' => @link, 'images' => @images}
-    end
+  def to_s
+    "Item
+  Link: #{@link}
+  Title: #{@title}
+  Price: #{@price}
+  Availability: #{@availability}
+  Code: #{@product_code}
+  Images:
+    #{@images.join("
+    ")}
+"
+  end
 
-    # приймає блок
-    def info()
-        yield
-    end
+  def to_h
+    {
+      'link' => @link,
+      'title' => @title,
+      'price' => @price,
+      'availibility' => @availability,
+      'product_code' => @product_code,
+      'images' => @images
+    }
+  end
 
+  def info
+    yield
+  end
+
+  def to_csv
+    [
+      @link,
+      @title,
+      @price,
+      @availability,
+      @product_code,
+      @images
+    ]
+  end
+
+  def as_json(*_options)
+    to_h
+  end
+
+  def to_json(*options)
+    as_json(*options).to_json(*options)
+  end
+
+  def to_txt
+    to_s
+  end
 end
